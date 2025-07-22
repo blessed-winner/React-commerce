@@ -1,0 +1,147 @@
+.normal{
+    padding:20px 50px;
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    z-index:100;
+    transition:0.2s;
+}
+.mobile-header{
+    padding:15px 50px;
+    background-color:white;
+    box-shadow:0px 8px 5px -5px rgba(0 0 0 /20%);
+    position:fixed;
+    z-index:100;
+    top:-2px;
+    right:0;
+    left:0;
+    transition:0.2s;
+}
+.menu{
+    display:none;
+}
+.flexSB{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.login-text-sc{
+    display:none;
+}
+.logo h1{
+    color:var(--main-color);
+    cursor:pointer;
+}
+
+.links ul{
+    display:flex;
+    align-items:center;
+}
+.links li{
+    margin-right:25px;
+}
+.links ul .none-lc{
+    display:none;
+}
+.links ul .none-lc .icon{
+   margin-right:5px;
+}
+.links li a,
+.active li a{
+    font-weight:500;
+    color:#374151;
+    transition:0.2s;
+}
+.links li a:hover,
+.active li a:hover{
+    color:var(--main-color);
+}
+.right{
+  display:flex;
+  align-items:center;
+}
+.right .actions{
+    display:flex;
+    align-items:center;
+}
+.right .actions span:nth-child(2) {
+     margin:0 25px;
+     font-size:14px;
+     border:1px solid rgba(0 0 0 /20%);
+     padding:8px 12px;
+     border-radius:8px;
+     display:flex;
+     align-items:center;
+}
+
+.right span:nth-child(2) a{
+    color:#374151;
+    font-weight:500;
+}
+.icon{
+    color:#0E0E0E;
+    transition:0.2s;
+}
+.flexSB .active ul{
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    position:absolute;
+    top:62px;
+    right:0;
+    left:0;
+    background:#fff;
+    padding:20px;
+    transition:0.3s;
+    align-items:flex-start;
+}
+.icon:hover{
+
+    color:var(--main-color);
+    cursor:pointer;
+}
+.menu{
+    color:#374151;
+}
+
+@media(max-width:765px){
+     .flexSB .links ul{
+        display:flex !important;
+        flex-direction:column;
+        position:absolute;
+        top:-800px;
+        background:#fff;
+        align-items:flex-start;
+        padding:20px;
+        right:0;
+        left:0;
+        transition:0.3s;
+     }
+     .flexSB .links ul li,
+     .flexSB .active ul li{
+        margin-bottom:25px;
+     }
+     .flexSB .links ul .none-lc,
+     .flexSB .active ul .none-lc{
+        display:flex;
+        align-items:center;
+     }
+     .flexSB .links ul .none-lc:hover .icon
+     ,.flexSB .active ul .none-lc:hover .icon{
+        color:var(--main-color);
+     }
+     .right .actions{
+        display:none;
+     }
+     .right .scmenu{
+        display:flex;
+        align-items:center;
+     }
+     
+     .menu{
+        display:initial;
+        margin-left:30px;
+     }
+ 
+}

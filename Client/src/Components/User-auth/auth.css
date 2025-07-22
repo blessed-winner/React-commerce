@@ -1,0 +1,73 @@
+.auth-section{
+    display:flex;
+    height:100vh;
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+    align-items:center;
+}
+.auth-section h1{
+    margin-bottom:20px;
+    color:#10B981;
+}
+.auth-section form{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    max-width:30%;
+    width:100%;
+    background:#fff;
+    border-radius:8px;
+    padding:20px 30px;
+    justify-content:center;
+}
+.auth-section form h2{
+    margin-bottom:25px;
+    width:100%;
+}
+.auth-section form label{
+    margin-bottom:15px;
+    font-size:14px;
+    font-weight:500;
+}
+.auth-section form input{
+    padding:8px 18px;
+    width:100%;
+    margin-bottom:15px;
+    border-bottom:1px solid #f0f0f0
+}
+
+.auth-section form button{
+    background:#10B981;
+    width:100%;
+    padding:10px 18px;
+    border-radius:8px;
+    color:white;
+    margin:15px 0;
+}
+
+.auth-section form span{
+    font-size:14px;
+    width:100%;
+}
+.auth-section form span a{
+    color:#10B981;
+}
+.auth-section form span a:hover{
+    text-decoration:underline;
+}
+.auth-section form .check-box{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:center;
+}
+.auth-section form .check-box input{
+    width:15px;
+    margin:0;
+}
+.auth-section form .check-box p{
+   font-size:14px;
+   display:inline;
+   flex:1;
+}
