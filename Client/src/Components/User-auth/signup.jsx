@@ -1,11 +1,11 @@
 import './auth.css';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-import{useNavigate} from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Signup = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { signup } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,42 +28,45 @@ const Signup = () => {
     }))
   }
   const[error,setError] = useState("")
+  const [loading, setLoading] = useState(false);
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
     
     
     if (!formData.name || !formData.email || !formData.password) {
       setError('Please fill in all fields.');
+      setLoading(false);
       return;
     }
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords don't match.");
+      setLoading(false);
       return;
     }
     if(!formData.agreed){
       setError("Please agree to the terms and conditions")
+      setLoading(false);
       return
     }
 
     try {
-      const res = await axios.post(
-        'http://localhost:3000/api/signup',
-        {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        },
-        { withCredentials: true }
-      );
-      setError("")
-      navigate('/');
-      
+      const result = await signup(formData.name, formData.email, formData.password);
+      if(result.success) {
+        setError("")
+        navigate('/');
+      } else {
+        setError(result.error);
+      }
     } catch (e) {
-      setError(e.response.data.error)
+      setError('An error occurred. Please try again.');
       console.error(e);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -115,7 +118,7 @@ const Signup = () => {
           </div>
           {error && <div className="error">{error}</div>}
 
-          <button type="submit">Sign Up</button>
+          <button type="submit" disabled={loading}>{loading ? 'Creating account...' : 'Sign Up'}</button>
           <span>
             Already have an account? <Link to="/login">Login</Link>
           </span>

@@ -1,11 +1,11 @@
 import './auth.css';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
+import {Link, useNavigate} from 'react-router-dom';
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData,setFormData] = useState({
     email:'',
     password:''  
@@ -20,26 +20,31 @@ const Login = () => {
  
    
   const [error,setError] = useState("");
+  const [loading, setLoading] = useState(false);
  
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setLoading(true);
      if(!formData.email || !formData.password){
     setError('Please fill all the fields');
+    setLoading(false);
     return;
   }
     try{
-      const res= await axios.post('http://localhost:3000/api/login',{
-      email:formData.email,
-      password:formData.password
-    },{withCredentials:true})
-    setError("")
-    navigate('/');
+      const result = await login(formData.email, formData.password);
+      if(result.success) {
+        setError("");
+        navigate('/');
+      } else {
+        setError(result.error);
+      }
     }
    catch(e){
-   
-    let errorMsg = e.response.data.error;
-     setError(errorMsg);
-    console.error(errorMsg);
+    setError('An error occurred. Please try again.');
+    console.error(e);
+   }
+   finally {
+    setLoading(false);
    }
   }
  
@@ -57,7 +62,7 @@ const Login = () => {
             <label htmlFor="password">Password:</label>
             <input type="password" placeholder = "password" name="password" value={formData.password} onChange={handleChange}/>
             {error && <div className="error">{error}</div>}
-            <button>Log In</button>
+            <button disabled={loading}>{loading ? 'Logging in...' : 'Log In'}</button>
             <span>Don't have an account ? <Link to = "/signup">Register</Link></span>
         </form>
         

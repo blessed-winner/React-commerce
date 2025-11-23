@@ -6,6 +6,7 @@ import {
   Route,
   useLocation
 } from "react-router-dom";
+import { AuthProvider } from './context/AuthContext';
 import Header from './Components/header/header';
 import Home from './Components/home/Home';
 import Shop from './Components/Shop/Shop';
@@ -19,6 +20,7 @@ import About from './Components/About/about';
 import Product from './Components/product/product';
 import Login from './Components/User-auth/login';
 import Signup from './Components/User-auth/signup';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 const AppLayout = () => {
   const location = useLocation();
@@ -48,8 +50,10 @@ return(
 const App = () => {
   return(
       <Router>
-    <AppLayout/>
-  </Router>
+        <AuthProvider>
+          <AppLayout/>
+        </AuthProvider>
+      </Router>
   )
 }
 export default App;
